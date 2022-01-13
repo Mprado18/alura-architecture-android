@@ -4,32 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import br.com.alura.technews.R
-import br.com.alura.technews.database.AppDatabase
 import br.com.alura.technews.model.Noticia
-import br.com.alura.technews.repository.NoticiaRepository
 import br.com.alura.technews.ui.activity.common.constants.MENSAGEM_FALHA_CARREGAR_NOTICIAS
 import br.com.alura.technews.ui.activity.common.constants.NOTICIA_ID_CHAVE
 import br.com.alura.technews.ui.activity.common.constants.TITULO_APPBAR
 import br.com.alura.technews.ui.activity.common.extensions.mostraErro
 import br.com.alura.technews.ui.activity.formulario_noticia.FormularioNoticiaActivity
 import br.com.alura.technews.ui.activity.lista_noticias.viewmodel.ListaNoticiasViewModel
-import br.com.alura.technews.ui.activity.lista_noticias.viewmodel.ListaNoticiasViewModelFactory
 import br.com.alura.technews.ui.activity.visualiza_noticia.VisualizaNoticiaActivity
 import br.com.alura.technews.ui.recyclerview.adapter.ListaNoticiasAdapter
 import kotlinx.android.synthetic.main.activity_lista_noticias.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListaNoticiasActivity : AppCompatActivity() {
 
-    private val viewModel by lazy {
-        val repository = NoticiaRepository(AppDatabase.getInstance(this).noticiaDAO)
-        val factory = ListaNoticiasViewModelFactory(repository)
-        val provedor = ViewModelProvider(this, factory)
-        provedor.get(ListaNoticiasViewModel::class.java)
-    }
+    private val viewModel: ListaNoticiasViewModel by viewModel()
 
     private val adapter by lazy {
         ListaNoticiasAdapter(context = this)
