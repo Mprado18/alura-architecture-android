@@ -5,19 +5,16 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import br.com.alura.technews.R
-import br.com.alura.technews.database.AppDatabase
 import br.com.alura.technews.model.Noticia
-import br.com.alura.technews.repository.NoticiaRepository
 import br.com.alura.technews.ui.activity.common.constants.MENSAGEM_ERRO_SALVAR
 import br.com.alura.technews.ui.activity.common.constants.NOTICIA_ID_CHAVE
 import br.com.alura.technews.ui.activity.common.constants.TITULO_APPBAR_CRIACAO
 import br.com.alura.technews.ui.activity.common.constants.TITULO_APPBAR_EDICAO
 import br.com.alura.technews.ui.activity.common.extensions.mostraErro
 import br.com.alura.technews.ui.activity.formulario_noticia.viewmodel.FormularioNoticiaViewModel
-import br.com.alura.technews.ui.activity.formulario_noticia.viewmodel.FormularioNoticiaViewModelFactory
 import kotlinx.android.synthetic.main.activity_formulario_noticia.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FormularioNoticiaActivity : AppCompatActivity() {
 
@@ -25,11 +22,7 @@ class FormularioNoticiaActivity : AppCompatActivity() {
         intent.getLongExtra(NOTICIA_ID_CHAVE, 0)
     }
 
-    private val viewModel by lazy {
-        val repository = NoticiaRepository(AppDatabase.getInstance(this).noticiaDAO)
-        val factory = FormularioNoticiaViewModelFactory(repository)
-        ViewModelProvider(this, factory).get(FormularioNoticiaViewModel::class.java)
-    }
+    private val viewModel: FormularioNoticiaViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

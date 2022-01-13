@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:name=".AppApplication">
         <activity android:name=".ui.activity.formulario_noticia.FormularioNoticiaActivity" />
         <activity android:name=".ui.activity.visualiza_noticia.VisualizaNoticiaActivity" />
         <activity android:name=".ui.activity.lista_noticias.ListaNoticiasActivity">
