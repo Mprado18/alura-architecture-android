@@ -7,26 +7,33 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.com.alura.aluraSport.R
 import br.com.alura.aluraSport.extensions.formatParaMoedaBrasileira
 import br.com.alura.aluraSport.model.Pagamento
 import br.com.alura.aluraSport.model.Produto
-import br.com.alura.aluraSport.ui.activity.CHAVE_PRODUTO_ID
 import br.com.alura.aluraSport.ui.viewmodel.PagamentoViewModel
 import kotlinx.android.synthetic.main.pagamento.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val FALHA_AO_CRIAR_PAGAMENTO = "Falha ao criar pagamento"
+private const val COMPRA_REALIZADA = "Compra realizada"
 
 class PagamentoFragment : Fragment() {
 
+    private val argumentos by navArgs<PagamentoFragmentArgs>()
+
     private val produtoId by lazy {
-        arguments?.getLong(CHAVE_PRODUTO_ID)
-            ?: throw IllegalArgumentException(ID_PRODUTO_INVALIDO)
+        argumentos.produtoId
     }
+
+    private val controlador by lazy {
+        findNavController()
+    }
+
     private val viewModel: PagamentoViewModel by viewModel()
     private lateinit var produtoEscolhido: Produto
-    var quandoPagamentoRealizado: (idPagamento: Long) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +54,7 @@ class PagamentoFragment : Fragment() {
     }
 
     private fun buscaProduto() {
-        viewModel.buscaProdutoPorId(produtoId).observe(this, Observer {
+        viewModel.buscaProdutoPorId(produtoId).observe(viewLifecycleOwner, Observer {
             it?.let { produtoEncontrado ->
                 produtoEscolhido = produtoEncontrado
                 pagamento_preco.text = produtoEncontrado.preco
@@ -70,9 +77,18 @@ class PagamentoFragment : Fragment() {
         if (::produtoEscolhido.isInitialized) {
             viewModel.salva(pagamento)
                 .observe(this, Observer {
-                    it?.dado?.let(quandoPagamentoRealizado)
+                    it?.dado?.let {
+                        Toast.makeText(context, COMPRA_REALIZADA, Toast.LENGTH_SHORT).show()
+                        vaiParaListaProdutos()
+                    }
                 })
         }
+    }
+
+    private fun vaiParaListaProdutos() {
+        val actionPagamentoFragmentToListaProdutos =
+            PagamentoFragmentDirections.actionPagamentoFragmentToListaProdutos()
+        controlador.navigate(actionPagamentoFragmentToListaProdutos)
     }
 
     private fun criaPagamento(): Pagamento? {

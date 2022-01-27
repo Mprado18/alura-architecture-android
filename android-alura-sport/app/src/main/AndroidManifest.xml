@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="br.com.alura.aluraSport.AppApplication">
-        <activity android:name="br.com.alura.aluraSport.ui.activity.ProdutosActivity">
+        <activity android:name="br.com.alura.aluraSport.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
