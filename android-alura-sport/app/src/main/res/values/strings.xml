@@ -5,4 +5,14 @@
     <string name="numero_cartao">Número cartão</string>
     <string name="numero_cvc">CVC</string>
     <string name="confirmar_pagamento">Confirmar pagamento</string>
+    <string name="password">Senha</string>
+    <string name="user_id">Id do usuário</string>
+    <string name="login">Logar</string>
+    <string name="exit">Deslogar</string>
+    <string name="regiter_new_user">Cadastrar novo usuário</string>
+    <string name="name">Nome</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="register">Cadastrar</string>
+    <string name="products">Produtos</string>
+    <string name="payments">Pagamentos</string>
 </resources>

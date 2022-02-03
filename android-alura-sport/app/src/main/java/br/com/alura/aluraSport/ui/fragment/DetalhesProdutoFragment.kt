@@ -4,30 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.alura.aluraSport.R
 import br.com.alura.aluraSport.extensions.formatParaMoedaBrasileira
+import br.com.alura.aluraSport.ui.viewmodel.ComponentesVisuais
 import br.com.alura.aluraSport.ui.viewmodel.DetalhesProdutoViewModel
+import br.com.alura.aluraSport.ui.viewmodel.EstadoAppViewModel
 import kotlinx.android.synthetic.main.detalhes_produto.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class DetalhesProdutoFragment : Fragment() {
+class DetalhesProdutoFragment : BaseFragment() {
 
     private val argumentos by navArgs<DetalhesProdutoFragmentArgs>()
 
-    private val produtoId by lazy {
-        argumentos.produtoId
-    }
-
-    private val controlador by lazy {
-        findNavController()
-    }
+    private val produtoId by lazy { argumentos.produtoId }
+    private val controlador by lazy { findNavController() }
 
     private val viewModel: DetalhesProdutoViewModel by viewModel { parametersOf(produtoId) }
+    private val estadoAppViewModel: EstadoAppViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +41,7 @@ class DetalhesProdutoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        estadoAppViewModel.temComponentes = ComponentesVisuais(appBar = true)
         buscaProduto()
         configuraBotaoComprar()
     }

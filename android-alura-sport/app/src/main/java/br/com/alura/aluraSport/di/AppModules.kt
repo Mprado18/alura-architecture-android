@@ -1,5 +1,7 @@
 package br.com.alura.aluraSport.di
 
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -7,15 +9,15 @@ import br.com.alura.aluraSport.database.AppDatabase
 import br.com.alura.aluraSport.database.dao.PagamentoDAO
 import br.com.alura.aluraSport.database.dao.ProdutoDAO
 import br.com.alura.aluraSport.model.Produto
+import br.com.alura.aluraSport.repository.LoginRepository
 import br.com.alura.aluraSport.repository.PagamentoRepository
 import br.com.alura.aluraSport.repository.ProdutoRepository
 import br.com.alura.aluraSport.ui.fragment.DetalhesProdutoFragment
 import br.com.alura.aluraSport.ui.fragment.ListaProdutosFragment
 import br.com.alura.aluraSport.ui.fragment.PagamentoFragment
+import br.com.alura.aluraSport.ui.recyclerview.adapter.ListaPagamentosAdapter
 import br.com.alura.aluraSport.ui.recyclerview.adapter.ProdutosAdapter
-import br.com.alura.aluraSport.ui.viewmodel.DetalhesProdutoViewModel
-import br.com.alura.aluraSport.ui.viewmodel.PagamentoViewModel
-import br.com.alura.aluraSport.ui.viewmodel.ProdutosViewModel
+import br.com.alura.aluraSport.ui.viewmodel.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -75,6 +77,8 @@ val daoModule = module {
     single<PagamentoDAO> { get<AppDatabase>().pagamentoDao() }
     single<ProdutoRepository> { ProdutoRepository(get()) }
     single<PagamentoRepository> { PagamentoRepository(get()) }
+    single<LoginRepository> { LoginRepository(get()) }
+    single<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(get()) }
 }
 
 val uiModule = module {
@@ -82,10 +86,13 @@ val uiModule = module {
     factory<ListaProdutosFragment> { ListaProdutosFragment() }
     factory<PagamentoFragment> { PagamentoFragment() }
     factory<ProdutosAdapter> { ProdutosAdapter(get()) }
+    factory<ListaPagamentosAdapter> { ListaPagamentosAdapter(get()) }
 }
 
 val viewModelModule = module {
     viewModel<ProdutosViewModel> { ProdutosViewModel(get()) }
     viewModel<DetalhesProdutoViewModel> { (id: Long) -> DetalhesProdutoViewModel(id, get()) }
     viewModel<PagamentoViewModel> { PagamentoViewModel(get(), get()) }
+    viewModel<LoginViewModel> { LoginViewModel(get()) }
+    viewModel<EstadoAppViewModel> { EstadoAppViewModel() }
 }
