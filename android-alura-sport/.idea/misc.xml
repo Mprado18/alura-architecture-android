@@ -3,10 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/drawable/ic_baseline_credit_card_24.xml" value="0.1125" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.1712962962962963" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/drawable/ic_baseline_store_24.xml" value="0.1125" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/cadastro_usuario.xml" value="0.20416666666666666" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/detalhes_produto.xml" value="0.20416666666666666" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/item_pagamentos.xml" value="0.20416666666666666" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/lista_pagamentos.xml" value="0.20416666666666666" />
         <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/lista_produtos.xml" value="0.20416666666666666" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/login.xml" value="0.20416666666666666" />
         <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/main_activity.xml" value="0.20416666666666666" />
         <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/pagamento.xml" value="0.1" />
         <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/layout/produtos_activity.xml" value="0.20416666666666666" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/menu/menu_lista_produtos.xml" value="0.20416666666666666" />
+        <entry key="..\:/projetos/alura-architecture-android/android-alura-sport/app/src/main/res/menu/menu_principal_bottom_navigation.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

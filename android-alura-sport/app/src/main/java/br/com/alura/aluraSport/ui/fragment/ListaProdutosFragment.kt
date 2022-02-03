@@ -5,25 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.alura.aluraSport.R
 import br.com.alura.aluraSport.ui.recyclerview.adapter.ProdutosAdapter
+import br.com.alura.aluraSport.ui.viewmodel.ComponentesVisuais
+import br.com.alura.aluraSport.ui.viewmodel.EstadoAppViewModel
 import br.com.alura.aluraSport.ui.viewmodel.ProdutosViewModel
 import kotlinx.android.synthetic.main.lista_produtos.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ListaProdutosFragment : Fragment() {
+class ListaProdutosFragment : BaseFragment() {
 
     private val viewModel: ProdutosViewModel by viewModel()
+    private val estadoAppViewModel: EstadoAppViewModel by sharedViewModel()
     private val adapter: ProdutosAdapter by inject()
 
-    private val controlador by lazy {
-        findNavController()
-    }
+    private val controlador by lazy { findNavController() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,10 @@ class ListaProdutosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        estadoAppViewModel.temComponentes = ComponentesVisuais(
+            appBar = true,
+            bottomNavigation = true
+        )
         configuraRecyclerView()
     }
 

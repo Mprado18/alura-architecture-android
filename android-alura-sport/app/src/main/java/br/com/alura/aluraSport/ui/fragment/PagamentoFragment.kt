@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -13,14 +12,17 @@ import br.com.alura.aluraSport.R
 import br.com.alura.aluraSport.extensions.formatParaMoedaBrasileira
 import br.com.alura.aluraSport.model.Pagamento
 import br.com.alura.aluraSport.model.Produto
+import br.com.alura.aluraSport.ui.viewmodel.ComponentesVisuais
+import br.com.alura.aluraSport.ui.viewmodel.EstadoAppViewModel
 import br.com.alura.aluraSport.ui.viewmodel.PagamentoViewModel
 import kotlinx.android.synthetic.main.pagamento.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val FALHA_AO_CRIAR_PAGAMENTO = "Falha ao criar pagamento"
 private const val COMPRA_REALIZADA = "Compra realizada"
 
-class PagamentoFragment : Fragment() {
+class PagamentoFragment : BaseFragment() {
 
     private val argumentos by navArgs<PagamentoFragmentArgs>()
 
@@ -33,6 +35,8 @@ class PagamentoFragment : Fragment() {
     }
 
     private val viewModel: PagamentoViewModel by viewModel()
+    private val estadoAppViewModel: EstadoAppViewModel by sharedViewModel()
+
     private lateinit var produtoEscolhido: Produto
 
     override fun onCreateView(
@@ -49,6 +53,7 @@ class PagamentoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        estadoAppViewModel.temComponentes = ComponentesVisuais(appBar = true)
         configuraBotaoConfirmaPagamento()
         buscaProduto()
     }
