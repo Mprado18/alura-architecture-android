@@ -6,4 +6,6 @@
     <string name="digite_o_endere_o_da_imagem">Digite o endereço da imagem</string>
     <string name="imagem_da_nota">Imagem da nota</string>
     <string name="imagem_nota_favorita">imagem nota favorita</string>
+    <string name="include_new_note">Incluir nova nota a listagem</string>
+    <string name="include_img_in_note">Adicionar imagem à nota</string>
 </resources>
